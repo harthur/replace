@@ -1,0 +1,6 @@
+should match three lines
+
+xxxx
+xxxx
+yyyy
+x
