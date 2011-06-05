@@ -1,9 +1,9 @@
 # replace
-`replace` is a command-line utility for performing search-and-replace on files. It's similar to sed but there are a few differences:
+`replace` is a command line utility for performing search-and-replace on files. It's similar to sed but there are a few differences:
 
 * Modifies files when matches are found
 * Recursive search on directories with -r
-* Uses [JavaScript syntax](https://developer.mozilla.org/en/JavaScript/Guide/Regular_Expressions#Using_Simple_Patterns) for regular expressions.
+* Uses [JavaScript syntax](https://developer.mozilla.org/en/JavaScript/Guide/Regular_Expressions#Using_Simple_Patterns) for regular expressions and [replacement strings](https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String/replace#Specifying_a_string_as_a_parameter).
 * Asynchronous, but still slower than grep.
 
 # Install
