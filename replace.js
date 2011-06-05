@@ -64,9 +64,13 @@ function includeFile(file) {
 }
 
 function replacizeFile(file) {
-  fs.stat(file, function(err, stats) {
+  fs.lstat(file, function(err, stats) {
       if (err) throw err;
 
+      if (stats.isSymbolicLink()) {
+          // don't follow symbolic links for now
+          return;
+      }
       if (stats.isFile()) {
           if (!includeFile(file)) {
               return;
@@ -94,7 +98,11 @@ function replacizeFile(file) {
 }
 
 function replacizeFileSync(file) {
-  var stats = fs.statSync(file);
+  var stats = fs.lstatSync(file);
+  if (stats.isSymbolicLink()) {
+      // don't follow symbolic links for now
+      return;
+  }
   if (stats.isFile()) {
       if (!includeFile(file)) {
           return;
