@@ -20,13 +20,13 @@ Replace all occurrences of "var" with "let" in files in the current directory:
 replace 'var' 'let' *
 ```
 
-Replace occurrences in all files in a recursive search of the current directory:
+Replace in all files in a recursive search of the current directory:
 
 ```
 replace 'var' 'let' . -r
 ```
 
-Replace occurrences only in "test/file1.js" and "test/file2.js":
+Replace only in test/file1.js and test/file2.js:
 
 ```
 replace 'var' 'let' test/file1.js test/file2.js
@@ -38,16 +38,16 @@ Replace all word pairs with "_" in middle with a "-":
 replace '(\w+)_(\w+)' '$1-$2' *
 ```
 
-Replace occurrences only in files with names matching "*.js":
+Replace only in files with names matching *.js:
 
 ```
 replace 'var' 'let' . -r --include="*.js"
 ```
 
-Don't replace in files with names matching "*.py":
+Don't replace in files with names matching *.min.js and *.py:
 
 ```
-replace 'var' 'let' . -r --exclude="*.py"
+replace 'var' 'let' . -r --exclude="*.min.js,*.py"
 ```
 
 Preview the replacements without modifying any files:
@@ -65,7 +65,7 @@ replace -h
 # More Details
 
 ### Search
-There's also a `search` command. It's basically the exact same as `grep`, but with `replace`'s syntax, and slower!
+There's also a `search` command. It's like `grep`, but with `replace`'s syntax, and slower!
 
 ```
 search "setTimeout" . -r
@@ -76,3 +76,6 @@ By default, `replace` and `search` will exclude files (binaries, images, etc) th
 
 ### On huge directories
 `replace` will sputter on recursive searches of enormous directories. This ain't C. If `replace` is taking too long, try turning on the quiet flag with `-q` or only including the necessary file types with `--include`.
+
+If there are too many files in the directory, node will throw a `EMFILE, Too many open files`. Check your command line then try a synchronous search with `--synchronous`
+

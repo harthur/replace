@@ -41,6 +41,10 @@ var options = nomnom.opts({
         string: '-c COLOR, --color=COLOR',
         help: "highlight color, e.g. 'green', 'blue', 'bold'",
         default: 'cyan'
+    },
+    synchronous: {
+        string: '--synchronous',
+        hidden: true
     }
   })
   .scriptName("search")
