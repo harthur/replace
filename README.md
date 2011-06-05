@@ -79,3 +79,6 @@ By default, `replace` and `search` will exclude files (binaries, images, etc) th
 
 If there are too many files in the directory, node will throw a `EMFILE, Too many open files`. Check your command line then try a synchronous search with `--synchronous`
 
+### What it looks like
+![replace](http://i.imgur.com/qmJjS.png)
+
