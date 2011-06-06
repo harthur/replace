@@ -13,7 +13,7 @@ module.exports = function(opts) {
     options = opts;
     regex = new RegExp(options.regex, flags);
     
-    canReplace = !options.dryRun && options.replacement !== undefined;
+    canReplace = !options.preview && options.replacement !== undefined;
 
     if (options.include) {
         includes = options.include.split(",").map(patternToRegex);

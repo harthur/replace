@@ -25,9 +25,9 @@ var options = nomnom.opts({
         string: '-r, --recursive',
         help: "Recursively search and replace in directories"
     },
-    dryRun: {
-        string: '-d, --dry-run',
-        help: "See which occurances will be replaced, but don't modify files"
+    preview: {
+        string: '-p, --preview',
+        help: "Preview the replacements, but don't modify files"
     },
     include: {
         string: '--include=PATHS',
