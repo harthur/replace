@@ -11,7 +11,8 @@ var excludes = [],
 
 module.exports = function(opts) {
     options = opts;
-    regex = options.regex;
+    regex = new RegExp(options.regex, flags);
+    
     canReplace = !options.dryRun && options.replacement;
 
     if (options.include) {
@@ -123,7 +124,7 @@ function replacizeFileSync(file) {
 }
 
 function replacizeText(text, file) {
-    if (!new RegExp(regex, flags).test(text)) {
+    if (!regex.test(text)) {
         return text;
     }
 
@@ -134,14 +135,14 @@ function replacizeText(text, file) {
         var lines = text.split("\n");
         for (var i = 0; i < lines.length; i++) {
             var line = lines[i];
-            if (new RegExp(regex, flags).test(line)) {
+            if (regex.test(line)) {
                 var replacement = options.replacement || "$&";
-                line = line.replace(new RegExp(regex, flags), replacement[options.color]);
+                line = line.replace(regex, replacement[options.color]);
                 console.log("\t\t" + (i + 1) + ": " + line);
             }
         }
     }
     if (canReplace) {
-        return text.replace(new RegExp(regex, flags), options.replacement);
+        return text.replace(regex, options.replacement);
     }
 }
