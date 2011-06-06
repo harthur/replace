@@ -29,6 +29,10 @@ var options = nomnom.opts({
         string: '-p, --preview',
         help: "Preview the replacements, but don't modify files"
     },
+    count: {
+        string: '-n COUNT',
+        help: 'limit the number of lines to preview'
+    },
     include: {
         string: '--include=PATHS',
         help: "Only search in these files, e.g. '*.js,*.foo'"

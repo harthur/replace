@@ -33,6 +33,10 @@ var options = nomnom.opts({
         help: "File containing a new-line separated list of files to ignore",
         default: path.join(__dirname, "..", "defaultignore")
     },
+    count: {
+        string: '-n COUNT',
+        help: 'limit the number of lines to preview'
+    },
     quiet: {
         string: '-q, --quiet',
         help: "Just print the names of the files matches occured in (faster)"

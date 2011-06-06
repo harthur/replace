@@ -7,6 +7,7 @@ var excludes = [],
     regex,
     flags = "gm", // global multiline
     canReplace,
+    count = 0,
     options;
 
 module.exports = function(opts) {
@@ -136,6 +137,9 @@ function replacizeText(text, file) {
         for (var i = 0; i < lines.length; i++) {
             var line = lines[i];
             if (regex.test(line)) {
+                if (!canReplace && ++count > options.count) {
+                    process.exit(0);
+                }
                 var replacement = options.replacement || "$&";
                 line = line.replace(regex, replacement[options.color]);
                 console.log("\t\t" + (i + 1) + ": " + line);
