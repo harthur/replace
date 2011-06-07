@@ -1,6 +1,8 @@
 var fs = require("fs"),
     path = require("path"),
-    colors = require("colors");
+    readline = require("readline"),
+    colors = require("colors"),
+    async = require("async");
 
 var excludes = [],
     includes,
@@ -9,6 +11,8 @@ var excludes = [],
     canReplace,
     count = 0,
     options;
+
+var prompt = readline.createInterface(process.stdin, process.stdout);
 
 module.exports = function(opts) {
     options = opts;
@@ -80,12 +84,13 @@ function replacizeFile(file) {
           fs.readFile(file, "utf-8", function(err, text) {
               if (err) throw err;
 
-              text = replacizeText(text, file);             
-              if(canReplace) {
-                  fs.writeFile(file, text, function(err) {
-                      if (err) throw err;
-                  });
-              }
+              replacizeText(text, file, function(replaced) {;             
+                  if(canReplace) {
+                      fs.writeFile(file, replaced, function(err) {
+                          if (err) throw err;
+                      });
+                  }
+              });
           });
       }
       else if (stats.isDirectory() && options.recursive) {
@@ -111,10 +116,11 @@ function replacizeFileSync(file) {
       }   
       var text = fs.readFileSync(file, "utf-8");
 
-      text = replacizeText(text, file);
-      if (canReplace) {
-          fs.writeFileSync(file, text);
-      }
+      replacizeText(text, file, function(replaced) {;             
+          if(canReplace) {
+              fs.writeFileSync(file, replaced);
+          }
+      });
   }
   else if (stats.isDirectory() && options.recursive) {
       var files = fs.readdirSync(file);
@@ -124,29 +130,58 @@ function replacizeFileSync(file) {
   }
 }
 
-function replacizeText(text, file) {
+function replacizeText(text, file, callback) {
     if (!regex.test(text)) {
-        return text;
+        callback(text);
     }
 
     if (!options.silent) {
         console.log("\t" + file);
     }
     if (!options.silent && !options.quiet) {
-        var lines = text.split("\n");
-        for (var i = 0; i < lines.length; i++) {
-            var line = lines[i];
-            if (regex.test(line)) {
-                if (!canReplace && ++count > options.count) {
-                    process.exit(0);
+        replaceLines(text.split("\n"), callback);
+    }
+    else if (canReplace) {
+        callback(text.replace(regex, options.replacement));
+    }
+}
+
+function replaceLines(lines, callback) {
+    var lineNo = 0;
+
+    function replaceLine(line, next) {
+        lineNo++;
+        if (!regex.test(line)) {
+            return next();
+        }
+        if (!canReplace && ++count > options.count) {
+            process.exit(0);
+        }
+        
+        var replacement = options.replacement || "$&";
+        line = line.replace(regex, replacement[options.color]);     
+        process.stdout.write("\t\t" + (lineNo + 1) + ": " + line);
+
+        if (options.prompt) {
+            prompt.question("replace?", function(answer) {
+                if (answer == "y") {
+                    lines[lineNo] = line.replace(regex, options.replacement);
                 }
-                var replacement = options.replacement || "$&";
-                line = line.replace(regex, replacement[options.color]);
-                console.log("\t\t" + (i + 1) + ": " + line);
-            }
+                else if (answer == "n") {
+                    console.log("skipped");                
+                }
+                next();
+            });
+        }
+        else {
+            process.stdout.write("\n"); // prompt adds newline
+            lines[lineNo] = line.replace(regex, options.replacement);
+            next();
         }
     }
-    if (canReplace) {
-        return text.replace(regex, options.replacement);
-    }
+
+    async.forEachSeries(lines, replaceLine, function (err) {
+        if (err) throw err;
+        callback(lines.join("\n"));
+    });
 }
