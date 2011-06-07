@@ -79,7 +79,13 @@ function replacizeFile(file) {
               return;
           }     
           fs.readFile(file, "utf-8", function(err, text) {
-              if (err) throw err;
+              if (err) {
+                  if (err.code == 'EMFILE') {
+                      console.log('Too many files, try running `replace --synchronous`');
+                      process.exit(1);
+                  }
+                  throw err;
+              }
 
               text = replacizeText(text, file);             
               if(canReplace) {
