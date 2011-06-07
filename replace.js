@@ -8,6 +8,7 @@ var excludes = [],
     flags = "gm", // global multiline
     canReplace,
     count = 0,
+    limit = 400, // chars per line
     options;
 
 module.exports = function(opts) {
@@ -142,7 +143,7 @@ function replacizeText(text, file) {
                 }
                 var replacement = options.replacement || "$&";
                 line = line.replace(regex, replacement[options.color]);
-                console.log("\t\t" + (i + 1) + ": " + line);
+                console.log("\t\t" + (i + 1) + ": " + line.slice(0, limit));
             }
         }
     }

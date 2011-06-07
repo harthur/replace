@@ -52,7 +52,7 @@ replace 'var' 'let' . -r --exclude="*.min.js,*.py"
 Preview the replacements without modifying any files:
 
 ```
-replace 'var' 'let' . -r --dry-run
+replace 'var' 'let' . -r --preview
 ```
 
 See all the options:
