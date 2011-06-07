@@ -46,9 +46,9 @@ var options = nomnom.opts({
         help: "highlight color, e.g. 'green', 'blue', 'bold'",
         default: 'cyan'
     },
-    synchronous: {
-        string: '--synchronous',
-        hidden: true
+    async: {
+        string: '-a, --async',
+        help: "asynchronously read/write files in directory (faster)"
     }
   })
   .scriptName("search")

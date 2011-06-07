@@ -74,9 +74,8 @@ search "setTimeout" . -r
 By default, `replace` and `search` will exclude files (binaries, images, etc) that match patterns in the `"defaultignore"` located in this directory.
 
 ### On huge directories
-`replace` will sputter on recursive searches of enormous directories. This ain't C. If `replace` is taking too long, try turning on the quiet flag with `-q` or only including the necessary file types with `--include`.
+If `replace` is taking too long on a large directory, try turning on the quiet flag with `-q`, only including the necessary file types with `--include` or limiting the lines shown in a preview with `-n`.
 
-If there are too many files in the directory, node will throw a `EMFILE, Too many open files`. Check your command line then try a synchronous search with `--synchronous`
 
 ### What it looks like
 ![replace](http://i.imgur.com/qmJjS.png)

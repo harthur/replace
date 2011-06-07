@@ -36,11 +36,11 @@ module.exports = function(opts) {
     }
 
     for (var i = 0; i < options.path.length; i++) {
-        if(options.synchronous) {
-            replacizeFileSync(options.path[i]);
+        if(options.async) {
+            replacizeFile(options.path[i]);
         }
         else {
-            replacizeFile(options.path[i]);         
+            replacizeFileSync(options.path[i]);
         }
     }
 }
@@ -81,7 +81,7 @@ function replacizeFile(file) {
           fs.readFile(file, "utf-8", function(err, text) {
               if (err) {
                   if (err.code == 'EMFILE') {
-                      console.log('Too many files, try running `replace --synchronous`');
+                      console.log('Too many files, try running `replace` without --async');
                       process.exit(1);
                   }
                   throw err;
@@ -99,7 +99,7 @@ function replacizeFile(file) {
           fs.readdir(file, function(err, files) {
               if (err) throw err;
               for (var i = 0; i < files.length; i++) {
-                  replacizeFile(path.join(file, files[i]));                      
+                  replacizeFile(path.join(file, files[i]));
               }
           });
       }
