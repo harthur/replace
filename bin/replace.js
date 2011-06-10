@@ -29,9 +29,13 @@ var options = nomnom.opts({
         string: '-p, --preview',
         help: "Preview the replacements, but don't modify files"
     },
-    count: {
-        string: '-n COUNT',
+    maxLines: {
+        string: '-n NUMLINES',
         help: 'limit the number of lines to preview'
+    },
+    count: {
+        string: '-c, --count',
+        help: 'display count of occurances in each file'
     },
     include: {
         string: '--include=PATHS',
@@ -56,7 +60,7 @@ var options = nomnom.opts({
         help: "Don't print out anything"
     },
     color: {
-        string: '-c COLOR, --color=COLOR',
+        string: '--color=COLOR',
         help: "highlight color, e.g. 'green', 'blue', 'bold'",
         default: 'cyan'
     },

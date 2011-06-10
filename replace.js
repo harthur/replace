@@ -7,7 +7,7 @@ var excludes = [],
     regex,
     flags = "gm", // global multiline
     canReplace,
-    count = 0,
+    lineCount = 0,
     limit = 400, // chars per line
     options;
 
@@ -137,14 +137,18 @@ function replacizeText(text, file) {
     }
 
     if (!options.silent) {
-        console.log("\t" + file);
+        var printout = "\t" + file;
+        if (options.count) {
+            printout += " (" + text.match(regex).length + ")";
+        }
+        console.log(printout);
     }
-    if (!options.silent && !options.quiet && !(count > options.count)) {
+    if (!options.silent && !options.quiet && !(lineCount > options.maxLines)) {
         var lines = text.split("\n");
         for (var i = 0; i < lines.length; i++) {
             var line = lines[i];
             if (regex.test(line)) {
-                if (++count > options.count) {
+                if (++lineCount > options.maxLines) {
                     break;
                 }
                 var replacement = options.replacement || "$&";

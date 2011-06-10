@@ -34,16 +34,20 @@ var options = nomnom.opts({
         default: path.join(__dirname, "..", "defaultignore"),
         hidden: true
     },
-    count: {
+    maxLines: {
         string: '-n COUNT',
         help: 'limit the number of lines to preview'
+    },
+    count: {
+        string: '-c, --count',
+        help: 'display count of occurances in each file'
     },
     quiet: {
         string: '-q, --quiet',
         help: "Just print the names of the files matches occured in (faster)"
     },
     color: {
-        string: '-c COLOR, --color=COLOR',
+        string: '--color=COLOR',
         help: "highlight color, e.g. 'green', 'blue', 'bold'",
         default: 'cyan'
     },
