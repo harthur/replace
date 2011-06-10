@@ -7,7 +7,9 @@ var excludes = [],
     regex,
     canReplace,
     lineCount = 0,
+    fileLimit = 512,
     limit = 400, // chars per line
+    openFiles = 0,
     options;
 
 module.exports = function(opts) {
@@ -68,18 +70,35 @@ function includeFile(file) {
     }
 }
 
+var pendingFiles = [];
+
+function decrementOpenFiles(){
+    if(--openFiles < fileLimit){
+        var file = pendingFiles.pop();
+        if(file) replacizeFile(file);
+    }
+}
+
 function replacizeFile(file) {
+  if(openFiles >= fileLimit){
+       pendingFiles.push(file);
+       return;
+  }
+
+  ++openFiles;
   fs.lstat(file, function(err, stats) {
       if (err) throw err;
 
       if (stats.isSymbolicLink()) {
           // don't follow symbolic links for now
-          return;
+		 decrementOpenFiles(); 
+         return;
       }
       if (stats.isFile()) {
           if (!includeFile(file)) {
+              decrementOpenFiles();
               return;
-          }     
+          }
           fs.readFile(file, "utf-8", function(err, text) {
               if (err) {
                   if (err.code == 'EMFILE') {
@@ -93,7 +112,10 @@ function replacizeFile(file) {
               if(canReplace) {
                   fs.writeFile(file, text, function(err) {
                       if (err) throw err;
+                      decrementOpenFiles();
                   });
+              } else {
+                decrementOpenFiles();
               }
           });
       }
@@ -103,9 +125,11 @@ function replacizeFile(file) {
               for (var i = 0; i < files.length; i++) {
                   replacizeFile(path.join(file, files[i]));
               }
+              decrementOpenFiles();
           });
       }
    });
+
 }
 
 function replacizeFileSync(file) {
