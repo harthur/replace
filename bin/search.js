@@ -20,6 +20,10 @@ var options = nomnom.opts({
         string: '-r, --recursive',
         help: "Recursively search directories"
     },
+    ignoreCase: {
+        string: '-i, --ignore-case',
+        help: "Ignore case when searching"
+    },
     include: {
         string: '--include=PATHS',
         help: "Only search in these files, e.g. '*.js,*.foo'"
@@ -35,7 +39,7 @@ var options = nomnom.opts({
         hidden: true
     },
     maxLines: {
-        string: '-n COUNT',
+        string: '-n NUMLINES',
         help: 'limit the number of lines to preview'
     },
     count: {

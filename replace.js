@@ -5,7 +5,6 @@ var fs = require("fs"),
 var excludes = [],
     includes,
     regex,
-    flags = "gm", // global multiline
     canReplace,
     lineCount = 0,
     limit = 400, // chars per line
@@ -13,8 +12,11 @@ var excludes = [],
 
 module.exports = function(opts) {
     options = opts;
+    var flags = "gm"; // global multiline
+    if (options.ignoreCase) {
+        flags += "i";
+    }
     regex = new RegExp(options.regex, flags);
-    
     canReplace = !options.preview && options.replacement !== undefined;
 
     if (options.include) {

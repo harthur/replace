@@ -29,13 +29,9 @@ var options = nomnom.opts({
         string: '-p, --preview',
         help: "Preview the replacements, but don't modify files"
     },
-    maxLines: {
-        string: '-n NUMLINES',
-        help: 'limit the number of lines to preview'
-    },
-    count: {
-        string: '-c, --count',
-        help: 'display count of occurances in each file'
+    ignoreCase: {
+        string: '-i, --ignore-case',
+        help: "Ignore case when matching"
     },
     include: {
         string: '--include=PATHS',
@@ -50,6 +46,14 @@ var options = nomnom.opts({
         help: "File containing a new-line separated list of files to ignore",
         default: path.join(__dirname, "..", "defaultignore"),
         hidden: true
+    },
+    maxLines: {
+        string: '-n NUMLINES',
+        help: 'limit the number of lines to preview'
+    },
+    count: {
+        string: '-c, --count',
+        help: 'display count of occurances in each file'
     },
     quiet: {
         string: '-q, --quiet',
