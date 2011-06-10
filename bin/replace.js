@@ -44,7 +44,8 @@ var options = nomnom.opts({
     excludeList: {
         string: '--exclude-list=FILE',
         help: "File containing a new-line separated list of files to ignore",
-        default: path.join(__dirname, "..", "defaultignore")
+        default: path.join(__dirname, "..", "defaultignore"),
+        hidden: true
     },
     quiet: {
         string: '-q, --quiet',
