@@ -139,13 +139,13 @@ function replacizeText(text, file) {
     if (!options.silent) {
         console.log("\t" + file);
     }
-    if (!options.silent && !options.quiet) {
+    if (!options.silent && !options.quiet && !(count > options.count)) {
         var lines = text.split("\n");
         for (var i = 0; i < lines.length; i++) {
             var line = lines[i];
             if (regex.test(line)) {
-                if (!canReplace && ++count > options.count) {
-                    process.exit(0);
+                if (++count > options.count) {
+                    break;
                 }
                 var replacement = options.replacement || "$&";
                 line = line.replace(regex, replacement[options.color]);
