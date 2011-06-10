@@ -14,7 +14,7 @@ var options = nomnom.opts({
         position: 1,
         help: "File (or directory when using -r) to search",
         list: true,
-        required: true
+        default: ["."]
     },
     recursive: {
         string: '-r, --recursive',
