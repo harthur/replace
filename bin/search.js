@@ -12,7 +12,7 @@ var options = nomnom.opts({
     },
     path: {
         position: 1,
-        help: "File (or directory when using -r) to search",
+        help: "File or directory to search (default is '.')",
         list: true,
         default: ["."]
     },

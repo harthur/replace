@@ -54,14 +54,14 @@ function patternToRegex(pattern) {
 function includeFile(file) {
     if (includes) {
         for (var i = 0; i < includes.length; i++) {
-            if (includes[i].test(file))
+            if (file.match(includes[i]))
                 return true;
         }
         return false;      
     }
     else {
         for (var i = 0; i < excludes.length; i++) {
-            if (excludes[i].test(file))
+            if (file.match(excludes[i]))
                 return false;
         }
         return true;
@@ -134,14 +134,15 @@ function replacizeFileSync(file) {
 }
 
 function replacizeText(text, file) {
-    if (!regex.test(text)) {
+    var match = text.match(regex);
+    if (!match) {
         return text;
     }
 
     if (!options.silent) {
         var printout = "\t" + file;
         if (options.count) {
-            printout += " (" + text.match(regex).length + ")";
+            printout += " (" + match.length + ")";
         }
         console.log(printout);
     }
@@ -149,7 +150,7 @@ function replacizeText(text, file) {
         var lines = text.split("\n");
         for (var i = 0; i < lines.length; i++) {
             var line = lines[i];
-            if (regex.test(line)) {
+            if (line.match(regex)) {
                 if (++lineCount > options.maxLines) {
                     break;
                 }
