@@ -22,27 +22,35 @@ var options = nomnom.opts({
         default: ["."]
     },
     recursive: {
-        string: '-r, --recursive',
+        abbr: 'r',
         help: "Recursively search and replace in directories"
     },
     preview: {
-        string: '-p, --preview',
+        abbr: 'p',
         help: "Preview the replacements, but don't modify files"
     },
     ignoreCase: {
-        string: '-i, --ignore-case',
+        abbr: 'i',
+        full: 'ignore-case',
         help: "Ignore case when matching"
     },
+    funcFile: {
+        abbr: 'f',
+        full: 'function-file',
+        metavar: 'PATH',
+        help: 'file containing JS replacement function'
+    },
     include: {
-        string: '--include=PATHS',
+        metavar: 'PATHS',
         help: "Only search in these files, e.g. '*.js,*.foo'"
     },
     exclude: {
-        string: '--exclude=PATHS',
+        metavar: 'PATHS',
         help: "Don't search in these files, e.g. '*.min.js'"
     },
     excludeList: {
-        string: '--exclude-list=FILE',
+        full: 'exclude-list',
+        metavar: 'FILE',
         help: "File containing a new-line separated list of files to ignore",
         default: path.join(__dirname, "..", "defaultignore"),
         hidden: true
@@ -52,24 +60,24 @@ var options = nomnom.opts({
         help: 'limit the number of lines to preview'
     },
     count: {
-        string: '-c, --count',
+        abbr: 'c',
         help: 'display count of occurances in each file'
     },
     quiet: {
-        string: '-q, --quiet',
+        abbr: 'q',
         help: "Just print the names of the files matches occured in (faster)"
     },
     silent: {
-        string: '-s, --silent',
+        abbr: 's',
         help: "Don't print out anything"
     },
     color: {
-        string: '--color=COLOR',
+        metavar: 'COLOR',
         help: "highlight color, e.g. 'green', 'blue', 'bold'",
         default: 'cyan'
     },
     async: {
-        string: '-a, --async',
+        abbr: 'a',
         help: "asynchronously read/write files in directory (faster)"
     }
   })

@@ -6,6 +6,7 @@ var excludes = [],
     includes,
     regex,
     canReplace,
+    replaceFunc,
     lineCount = 0,
     limit = 400, // chars per line
     options;
@@ -35,6 +36,9 @@ module.exports = function(opts) {
     if (!options.silent) {
         var verb = canReplace ? "Replaced" : "Found";
         console.log(verb + " occurences in these files:");
+    }
+    if (options.funcFile) {
+       eval('replaceFunc = ' + fs.readFileSync(options.funcFile, "utf-8"));
     }
 
     for (var i = 0; i < options.path.length; i++) {
@@ -155,12 +159,12 @@ function replacizeText(text, file) {
                     break;
                 }
                 var replacement = options.replacement || "$&";
-                line = line.replace(regex, replacement[options.color]);
+                line = line.replace(regex, replaceFunc || replacement[options.color]);
                 console.log("\t\t" + (i + 1) + ": " + line.slice(0, limit));
             }
         }
     }
     if (canReplace) {
-        return text.replace(regex, options.replacement);
+        return text.replace(regex, replaceFunc || options.replacement);
     }
 }
