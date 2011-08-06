@@ -34,6 +34,12 @@ var options = nomnom.opts({
         full: 'ignore-case',
         help: "Ignore case when matching"
     },
+    multiline: {
+        abbr: 'm',
+        flag: true,
+        help: "Match line by line, default is true",
+        default: true
+    },
     funcFile: {
         abbr: 'f',
         full: 'function-file',

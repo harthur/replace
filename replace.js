@@ -13,9 +13,12 @@ var excludes = [],
 
 module.exports = function(opts) {
     options = opts;
-    var flags = "gm"; // global multiline
+    var flags = "g"; // global multiline
     if (options.ignoreCase) {
         flags += "i";
+    }
+    if (options.multiline) {
+        flags += "m";
     }
     regex = new RegExp(options.regex, flags);
     canReplace = !options.preview && options.replacement !== undefined;
@@ -150,7 +153,9 @@ function replacizeText(text, file) {
         }
         console.log(printout);
     }
-    if (!options.silent && !options.quiet && !(lineCount > options.maxLines)) {
+    if (!options.silent && !options.quiet
+       && !(lineCount > options.maxLines)
+       && options.multiline) {
         var lines = text.split("\n");
         for (var i = 0; i < lines.length; i++) {
             var line = lines[i];

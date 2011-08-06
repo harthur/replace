@@ -24,6 +24,12 @@ var options = nomnom.opts({
         string: '-i, --ignore-case',
         help: "Ignore case when searching"
     },
+    multiline: {
+        abbr: 'm',
+        flag: true,
+        help: "Match line by line, default is true",
+        default: true
+    },
     include: {
         string: '--include=PATHS',
         help: "Only search in these files, e.g. '*.js,*.foo'"
