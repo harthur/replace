@@ -23,15 +23,18 @@ var options = nomnom.opts({
     },
     recursive: {
         abbr: 'r',
+        flag: true,
         help: "Recursively search and replace in directories"
     },
     preview: {
         abbr: 'p',
+        flag: true,
         help: "Preview the replacements, but don't modify files"
     },
     ignoreCase: {
         abbr: 'i',
         full: 'ignore-case',
+        flag: true,
         help: "Ignore case when matching"
     },
     multiline: {
@@ -47,11 +50,11 @@ var options = nomnom.opts({
         help: 'file containing JS replacement function'
     },
     include: {
-        metavar: 'PATHS',
+        string: '--include=PATHS',
         help: "Only search in these files, e.g. '*.js,*.foo'"
     },
     exclude: {
-        metavar: 'PATHS',
+        string: '--exclude=PATHS',
         help: "Don't search in these files, e.g. '*.min.js'"
     },
     excludeList: {
@@ -67,23 +70,28 @@ var options = nomnom.opts({
     },
     count: {
         abbr: 'c',
+        flag: true,
         help: 'display count of occurances in each file'
     },
     quiet: {
         abbr: 'q',
+        flag: true,
         help: "Just print the names of the files matches occured in (faster)"
     },
     silent: {
         abbr: 's',
+        flag: true,
         help: "Don't print out anything"
     },
     color: {
         metavar: 'COLOR',
-        help: "highlight color, e.g. 'green', 'blue', 'bold'",
+        help: "highlight color, e.g. 'green' or 'blue'",
+        choices: ['red', 'green', 'blue', 'cyan', 'yellow', 'magenta', 'bold', 'italic'],
         default: 'cyan'
     },
     async: {
         abbr: 'a',
+        flag: true,
         help: "asynchronously read/write files in directory (faster)"
     }
   })

@@ -17,11 +17,13 @@ var options = nomnom.opts({
         default: ["."]
     },
     recursive: {
-        string: '-r, --recursive',
+        abbr: 'r',
+        flag: true,
         help: "Recursively search directories"
     },
     ignoreCase: {
-        string: '-i, --ignore-case',
+        abbr: 'i',
+        flag: true,
         help: "Ignore case when searching"
     },
     multiline: {
@@ -36,10 +38,11 @@ var options = nomnom.opts({
     },
     exclude: {
         string: '--exclude=PATHS',
-        help: "Don't search in these files, e.g. 'test*,*.min.js'"
+        help: "Don't search in these files, e.g. '*.min.js'"
     },
     excludeList: {
-        string: '--exclude-list=FILE',
+        full: 'exclude-list',
+        metavar: 'FILE',
         help: "File containing a new-line separated list of files to ignore",
         default: path.join(__dirname, "..", "defaultignore"),
         hidden: true
@@ -49,20 +52,24 @@ var options = nomnom.opts({
         help: 'limit the number of lines to preview'
     },
     count: {
-        string: '-c, --count',
+        abbr: 'c',
+        flag: true,
         help: 'display count of occurances in each file'
     },
     quiet: {
-        string: '-q, --quiet',
+        abbr: 'q',
+        flag: true,
         help: "Just print the names of the files matches occured in (faster)"
     },
     color: {
-        string: '--color=COLOR',
-        help: "highlight color, e.g. 'green', 'blue', 'bold'",
+        metavar: 'COLOR',
+        help: "highlight color, e.g. 'green' or 'blue'",
+        choices: ['red', 'green', 'blue', 'cyan', 'yellow', 'magenta', 'bold', 'italic'],
         default: 'cyan'
     },
     async: {
-        string: '-a, --async',
+        abbr: 'a',
+        flag: true,
         help: "asynchronously read/write files in directory (faster)"
     }
   })
