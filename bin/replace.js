@@ -4,7 +4,7 @@ var path = require("path"),
     nomnom = require("nomnom"),
     replace = require("../replace");
 
-var options = nomnom.opts({
+var options = nomnom.options({
     regex: {
         position: 0,
         help: "JavaScript regex for searching file e.g. '\\d+'",
@@ -95,7 +95,7 @@ var options = nomnom.opts({
         help: "asynchronously read/write files in directory (faster)"
     }
   })
-  .scriptName("replace")
-  .parseArgs();
+  .script("replace")
+  .parse();
 
 replace(options);
