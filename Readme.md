@@ -1,15 +1,20 @@
-# replace
-`replace` is a command line utility for performing search-and-replace on files. It's similar to sed but there are a few differences:
+# niftylettuce-replace <sup>0.2.0</sup>
+
+This is an updated fork of the repo for the original `replace` npm package.
+
+**Please use:** `$ npm install -g niftylettuce-replace`
+
+`$ replace` is a command line utility for performing search-and-replace on files. It's similar to sed but there are a few differences:
 
 * Modifies files when matches are found
 * Recursive search on directories with -r
 * Uses [JavaScript syntax](https://developer.mozilla.org/en/JavaScript/Guide/Regular_Expressions#Using_Simple_Patterns) for regular expressions and [replacement strings](https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String/replace#Specifying_a_string_as_a_parameter).
 
-# Install
-With [node.js](http://nodejs.org/) and [npm](http://github.com/isaacs/npm):
+# Quick Start
 
-	npm install replace -g
-
+```
+npm install -g niftylettuce-replace
+```
 
 ## Examples
 

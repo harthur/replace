@@ -3,7 +3,17 @@
 *.hg*
 *.svn*
 
+# Font files #
+*.ttf
+*.eot
+*.woff
+
+# Data #
+*.bson
+
 # Image files #
+*.xcf
+*.psd
 *.jpg
 *.png
 *.gif

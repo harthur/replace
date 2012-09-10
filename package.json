@@ -1,15 +1,15 @@
 {
-    "name": "replace",
+    "name": "niftylettuce-replace",
     "description": "Command line search and replace utility",
-    "version": "0.1.9",
+    "version": "0.2.0",
     "author": "Heather Arthur <fayearthur@gmail.com>",
     "repository": {
         "type": "git",
-        "url": "http://github.com/harthur/replace.git"
+        "url": "http://github.com/niftylettuce/replace.git"
     },
     "dependencies": {
-        "nomnom": "1.0.x",
-        "colors": "0.5.x"
+        "nomnom": ">= 1.0.x",
+        "colors": ">= 0.5.x"
     },
     "bin": {
         "replace": "./bin/replace.js",
