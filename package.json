@@ -3,6 +3,7 @@
     "description": "Command line search and replace utility",
     "version": "0.1.11",
     "author": "Heather Arthur <fayearthur@gmail.com>",
+    "main": "replace.js",
     "repository": {
         "type": "git",
         "url": "http://github.com/harthur/replace.git"
