@@ -13,6 +13,7 @@ var excludes = [],
 
 module.exports = function(opts) {
     options = opts;
+    if (!options.color) options.color = "cyan";
     var flags = "g"; // global multiline
     if (options.ignoreCase) {
         flags += "i";
@@ -29,7 +30,7 @@ module.exports = function(opts) {
     if (options.exclude) {
         excludes = options.exclude.split(",");
     }
-    var list = fs.readFileSync(options.excludeList, "utf-8").split("\n");
+    var list = fs.readFileSync(options.excludeList || path.join(__dirname, '/defaultignore'), "utf-8").split("\n");
     excludes = excludes.concat(list)
         .filter(function(line) {
             return line && line.indexOf("#");
