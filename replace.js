@@ -11,7 +11,7 @@ module.exports = function(opts) {
         lineCount = 0,
         limit = 400, // chars per line
         options;
-    
+
     options = opts;
     if (!options.color) options.color = "cyan";
     var flags = "g"; // global multiline
@@ -30,13 +30,14 @@ module.exports = function(opts) {
     if (options.exclude) {
         excludes = options.exclude.split(",");
     }
-    var list = fs.readFileSync(options.excludeList || path.join(__dirname, '/defaultignore'), "utf-8").split("\n");
+    var listFile = options.excludeList || path.join(__dirname, '/defaultignore');
+    var list = fs.readFileSync(listFile, "utf-8").split("\n");
     excludes = excludes.concat(list)
         .filter(function(line) {
             return line && line.indexOf("#");
         })
         .map(patternToRegex);
-    
+
     if (!options.silent) {
         var verb = canReplace ? "Replaced" : "Found";
         console.log(verb + " occurences in these files:");
@@ -53,7 +54,7 @@ module.exports = function(opts) {
             replacizeFileSync(options.path[i]);
         }
     }
-    
+
     function patternToRegex(pattern) {
         return new RegExp("^" + pattern.replace(/\./g, '\\.').replace(/\*/g, '.*').trim() + "$");
     }
@@ -64,7 +65,7 @@ module.exports = function(opts) {
                 if (file.match(includes[i]))
                     return true;
             }
-            return false;      
+            return false;
         }
         else {
             for (var i = 0; i < excludes.length; i++) {
@@ -86,7 +87,7 @@ module.exports = function(opts) {
           if (stats.isFile()) {
               if (!includeFile(file)) {
                   return;
-              }     
+              }
               fs.readFile(file, "utf-8", function(err, text) {
                   if (err) {
                       if (err.code == 'EMFILE') {
@@ -96,7 +97,7 @@ module.exports = function(opts) {
                       throw err;
                   }
 
-                  text = replacizeText(text, file);             
+                  text = replacizeText(text, file);
                   if(canReplace) {
                       fs.writeFile(file, text, function(err) {
                           if (err) throw err;
@@ -124,7 +125,7 @@ module.exports = function(opts) {
       if (stats.isFile()) {
           if (!includeFile(file)) {
               return;
-          }   
+          }
           var text = fs.readFileSync(file, "utf-8");
 
           text = replacizeText(text, file);
@@ -135,7 +136,7 @@ module.exports = function(opts) {
       else if (stats.isDirectory() && options.recursive) {
           var files = fs.readdirSync(file);
           for (var i = 0; i < files.length; i++) {
-              replacizeFileSync(path.join(file, files[i]));                      
+              replacizeFileSync(path.join(file, files[i]));
           }
       }
     }
