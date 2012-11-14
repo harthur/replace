@@ -38,10 +38,6 @@ module.exports = function(opts) {
         })
         .map(patternToRegex);
 
-    if (!options.silent) {
-        var verb = canReplace ? "Replaced" : "Found";
-        console.log(verb + " occurences in these files:");
-    }
     if (options.funcFile) {
        eval('replaceFunc = ' + fs.readFileSync(options.funcFile, "utf-8"));
     }
@@ -148,9 +144,9 @@ module.exports = function(opts) {
         }
 
         if (!options.silent) {
-            var printout = "\t" + file;
+            var printout = "  " + file;
             if (options.count) {
-                printout += " (" + match.length + ")";
+                printout += (" (" + match.length + ")").grey;
             }
             console.log(printout);
         }
@@ -166,7 +162,7 @@ module.exports = function(opts) {
                     }
                     var replacement = options.replacement || "$&";
                     line = line.replace(regex, replaceFunc || replacement[options.color]);
-                    console.log("\t\t" + (i + 1) + ": " + line.slice(0, limit));
+                    console.log("     " + (i + 1) + ": " + line.slice(0, limit));
                 }
             }
         }
