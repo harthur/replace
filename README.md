@@ -10,6 +10,8 @@ With [node.js](http://nodejs.org/) and [npm](http://github.com/isaacs/npm):
 
 	npm install replace -g
 
+You can now use `replace` and `search` from the command line.
+
 
 ## Examples
 
@@ -61,14 +63,14 @@ See all the options:
 replace -h
 ```
 
-# More Details
-
-### Search
-There's also a `search` command. It's like `grep`, but with `replace`'s syntax, and slower!
+## Search
+There's also a `search` command. It's like `grep`, but with `replace`'s syntax.
 
 ```
 search "setTimeout" . -r
 ```
+
+## More Details
 
 ### Excludes
 By default, `replace` and `search` will exclude files (binaries, images, etc) that match patterns in the `"defaultignore"` located in this directory.
@@ -77,6 +79,6 @@ By default, `replace` and `search` will exclude files (binaries, images, etc) th
 If `replace` is taking too long on a large directory, try turning on the quiet flag with `-q`, only including the necessary file types with `--include` or limiting the lines shown in a preview with `-n`.
 
 
-### What it looks like
+## What it looks like
 ![replace](http://i.imgur.com/qmJjS.png)
 
