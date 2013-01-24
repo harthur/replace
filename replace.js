@@ -10,6 +10,7 @@ module.exports = function(opts) {
         replaceFunc,
         lineCount = 0,
         limit = 400, // chars per line
+        // XXX The posix standard specifies that conforming sed implementations shall support at least 8192 byte line lengths.
         options;
 
     options = opts;
