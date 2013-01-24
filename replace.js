@@ -1,3 +1,27 @@
+// I was moved by your post on Hacker News. 
+//
+// The first thing I will say is that you shouldn't worry.
+// All programmers write code they later come to dislike or find embarassing.
+// That's called growth. If you look back at code you've written and don't
+// feel that way, you're either Turing Award material or have stopped learning.
+// 
+// Second, while I am neither defending nor condemning the Twitter comments you
+// highlighted, I would like to submit some ideas for you to consider. These are
+// offered in a spirit of helpfulness and empathy, so I sincerely hope they're 
+// received in that vein.
+//
+// - As programmers, we must frequently pass judgement on the work of others
+// - Ignorance is not the same as stupidity
+// - It is a valuable skill to be able separate criticism of one's work from
+//   criticism of one's person
+// 
+// Third, I would like to offer my impression of this utility and the code
+// found below. My intent is to possibly offer some helpful and constructive
+// criticism, since your post implied that you would have been receptive to 
+// learning and improving, and you seemed genuinely interested in understanding
+// the reaction.
+//
+// 
 var fs = require("fs"),
     path = require("path"),
     colors = require("colors");
