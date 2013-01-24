@@ -15,22 +15,22 @@ You can now use `replace` and `search` from the command line.
 
 ## Examples
 
-Replace all occurrences of "var" with "let" in files in the current directory:
+Replace all occurrences of "foo" with "bar" in files in the current directory:
 
 ```
-replace 'var' 'let' *
+replace 'foo' 'bar' *
 ```
 
 Replace in all files in a recursive search of the current directory:
 
 ```
-replace 'var' 'let' . -r
+replace 'foo' 'bar' . -r
 ```
 
 Replace only in test/file1.js and test/file2.js:
 
 ```
-replace 'var' 'let' test/file1.js test/file2.js
+replace 'foo' 'bar' test/file1.js test/file2.js
 ```
 
 Replace all word pairs with "_" in middle with a "-":
@@ -42,19 +42,19 @@ replace '(\w+)_(\w+)' '$1-$2' *
 Replace only in files with names matching *.js:
 
 ```
-replace 'var' 'let' . -r --include="*.js"
+replace 'foo' 'bar' . -r --include="*.js"
 ```
 
 Don't replace in files with names matching *.min.js and *.py:
 
 ```
-replace 'var' 'let' . -r --exclude="*.min.js,*.py"
+replace 'foo' 'bar' . -r --exclude="*.min.js,*.py"
 ```
 
 Preview the replacements without modifying any files:
 
 ```
-replace 'var' 'let' . -r --preview
+replace 'foo' 'bar' . -r --preview
 ```
 
 See all the options:
