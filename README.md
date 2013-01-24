@@ -1,5 +1,5 @@
 # replace
-`replace` is a command line utility for performing search-and-replace on files. It's similar to sed but there are a few differences:
+`replace` is a command line utility for performing in place search-and-replace on files. It's similar to sed but there are a few differences:
 
 * Modifies files when matches are found
 * Recursive search on directories with -r
@@ -78,7 +78,13 @@ By default, `replace` and `search` will exclude files (binaries, images, etc) th
 ### On huge directories
 If `replace` is taking too long on a large directory, try turning on the quiet flag with `-q`, only including the necessary file types with `--include` or limiting the lines shown in a preview with `-n`.
 
+## Limitations
 
+### Line length
+By default, `replace` works on files with lines of 400 characters or less. If you need to work on long lines, gnu `sed` supports unlimited line length.
+
+### Symbolic links
+By default, `replace` does not traverse symbolic links for files in directories.
 ## What it looks like
 ![replace](http://i.imgur.com/qmJjS.png)
 
