@@ -70,6 +70,21 @@ There's also a `search` command. It's like `grep`, but with `replace`'s syntax.
 search "setTimeout" . -r
 ```
 
+## Programmatic Usage
+You can use replace from your JS program:
+
+```javascript
+var replace = require("replace");
+
+replace({
+  regex: "foo",
+  replacement: "bar",
+  path: ['.'],
+  recursive: true,
+  silent: true,
+});
+```
+
 ## More Details
 
 ### Excludes
