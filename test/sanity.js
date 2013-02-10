@@ -67,3 +67,44 @@ test('multiline', function(t) {
   var expected = "abc\ndef";
   t.equal(getText(file), expected, "reverting worked");
 });
+
+test('case insensitive', function(t) {
+  t.plan(2);
+
+  var file = "./test_files/test_case.txt";
+
+  replace({
+    regex: "a",
+    replacement: "c",
+    path:[file],
+    ignoreCase: true
+  });
+
+  var expected = "cccc";
+  t.equal(getText(file), expected, "case insensitive replace");
+
+  replace({
+    regex: "c",
+    replacement: "A",
+    path:[file]
+  });
+
+  var expected = "AAAA";
+  t.equal(getText(file), expected, "reverting worked");
+})
+
+test('preview', function(t) {
+  t.plan(1);
+
+  var file = "./test_files/test_preview.txt";
+
+  replace({
+    regex: "a",
+    replacement: "c",
+    path:[file],
+    preview: true
+  });
+
+  var expected = "aaaa";
+  t.equal(getText(file), expected, "no replacement if 'preview' is true");
+})
