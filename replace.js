@@ -21,7 +21,13 @@ module.exports = function(opts) {
     if (options.multiline) {
         flags += "m";
     }
-    regex = new RegExp(options.regex, flags);
+
+    if (options.regex instanceof RegExp) {
+        regex = options.regex;
+    }
+    else {
+        regex = new RegExp(options.regex, flags);
+    }
     canReplace = !options.preview && options.replacement !== undefined;
 
     if (options.include) {
