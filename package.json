@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "nomnom": "1.5.x",
-    "colors": "0.5.x"
+    "colors": "0.5.x",
+    "minimatch": "~0.2.9"
   },
   "devDependencies": {
     "tape": "~0.2.2"

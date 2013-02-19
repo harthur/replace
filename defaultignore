@@ -1,7 +1,7 @@
 # Repositories #
-*.git*
-*.hg*
-*.svn*
+.git
+.hg
+.svn
 
 # Font files #
 *.ttf
@@ -59,6 +59,6 @@
 *.sqlite
 
 # OS generated files #
-*.DS_Store*
+.DS_Store
 ehthumbs.db
 Thumbs.db

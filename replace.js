@@ -1,19 +1,16 @@
 var fs = require("fs"),
     path = require("path"),
-    colors = require("colors");
+    colors = require("colors"),
+    minimatch = require("minimatch");
 
-module.exports = function(opts) {
-    var excludes = [],
-        includes,
-        regex,
-        canReplace,
-        replaceFunc,
-        lineCount = 0,
-        limit = 400, // chars per line
-        options;
+module.exports = function(options) {
+    var lineCount = 0,
+        limit = 400; // chars per line
 
-    options = opts;
-    if (!options.color) options.color = "cyan";
+    if (!options.color) {
+        options.color = "cyan";
+    }
+
     var flags = "g"; // global multiline
     if (options.ignoreCase) {
         flags += "i";
@@ -22,34 +19,34 @@ module.exports = function(opts) {
         flags += "m";
     }
 
+    var regex;
     if (options.regex instanceof RegExp) {
         regex = options.regex;
     }
     else {
         regex = new RegExp(options.regex, flags);
     }
-    canReplace = !options.preview && options.replacement !== undefined;
+    var canReplace = !options.preview && options.replacement !== undefined;
 
+    var includes;
     if (options.include) {
         includes = options.include.split(",").map(patternToRegex);
     }
+    var excludes = [];
     if (options.exclude) {
         excludes = options.exclude.split(",");
     }
-    var listFile = options.excludeList || path.join(__dirname, '/defaultignore');
-    var list = fs.readFileSync(listFile, "utf-8").split("\n");
-    excludes = excludes.concat(list)
-        .filter(function(line) {
-            return line && line.indexOf("#");
-        })
-        .map(patternToRegex);
+    var ignoreFile = options.excludeList || path.join(__dirname, '/defaultignore');
+    var ignores = fs.readFileSync(ignoreFile, "utf-8").split("\n");
+    excludes = excludes.concat(ignores);
 
+    var replaceFunc;
     if (options.funcFile) {
-       eval('replaceFunc = ' + fs.readFileSync(options.funcFile, "utf-8"));
+        eval('replaceFunc = ' + fs.readFileSync(options.funcFile, "utf-8"));
     }
 
     for (var i = 0; i < options.paths.length; i++) {
-        if(options.async) {
+        if (options.async) {
             replacizeFile(options.paths[i]);
         }
         else {
@@ -57,25 +54,15 @@ module.exports = function(opts) {
         }
     }
 
-    function patternToRegex(pattern) {
-        return new RegExp("^" + pattern.replace(/\./g, '\\.').replace(/\*/g, '.*').trim() + "$");
-    }
+    function canSearch(file) {
+      var inIncludes = includes && includes.some(function(include) {
+          return minimatch(file, include, { matchBase: true });
+      })
+      var inExcludes = excludes && excludes.some(function(exclude) {
+          return minimatch(file, exclude, { matchBase: true });
+      })
 
-    function includeFile(file) {
-        if (includes) {
-            for (var i = 0; i < includes.length; i++) {
-                if (file.match(includes[i]))
-                    return true;
-            }
-            return false;
-        }
-        else {
-            for (var i = 0; i < excludes.length; i++) {
-                if (file.match(excludes[i]))
-                    return false;
-            }
-            return true;
-        }
+      return ((!includes || inIncludes) && (!excludes || !inExcludes));
     }
 
     function replacizeFile(file) {
@@ -86,10 +73,10 @@ module.exports = function(opts) {
               // don't follow symbolic links for now
               return;
           }
+          if (!canSearch(file)) {
+              return;
+          }
           if (stats.isFile()) {
-              if (!includeFile(file)) {
-                  return;
-              }
               fs.readFile(file, "utf-8", function(err, text) {
                   if (err) {
                       if (err.code == 'EMFILE') {
@@ -100,7 +87,7 @@ module.exports = function(opts) {
                   }
 
                   text = replacizeText(text, file);
-                  if(canReplace) {
+                  if (canReplace) {
                       fs.writeFile(file, text, function(err) {
                           if (err) throw err;
                       });
@@ -124,10 +111,10 @@ module.exports = function(opts) {
           // don't follow symbolic links for now
           return;
       }
+      if (!canSearch(file)) {
+          return;
+      }
       if (stats.isFile()) {
-          if (!includeFile(file)) {
-              return;
-          }
           var text = fs.readFileSync(file, "utf-8");
 
           text = replacizeText(text, file);
