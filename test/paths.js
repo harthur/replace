@@ -13,7 +13,7 @@ test('recursive', function (t) {
   replace({
     regex: "a",
     replacement: "b",
-    path: ["test_files/test_paths"],
+    paths: ["test_files/test_paths"],
     recursive: true
   });
 
@@ -33,7 +33,7 @@ test('recursive', function (t) {
   replace({
     regex: "b",
     replacement: "a",
-    path: ["test_files/test_paths"],
+    paths: ["test_files/test_paths"],
     recursive: true
   });
 
@@ -48,7 +48,7 @@ test('exclude', function(t) {
   replace({
     regex: "a",
     replacement: "b",
-    path: ["test_files/test_paths"],
+    paths: ["test_files/test_paths"],
     recursive: true,
     exclude: "*sample*.txt"
   });
@@ -72,7 +72,7 @@ test('exclude', function(t) {
   replace({
     regex: "b",
     replacement: "a",
-    path: ["test_files/test_paths"],
+    paths: ["test_files/test_paths"],
     recursive: true
   });
 

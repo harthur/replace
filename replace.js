@@ -48,12 +48,12 @@ module.exports = function(opts) {
        eval('replaceFunc = ' + fs.readFileSync(options.funcFile, "utf-8"));
     }
 
-    for (var i = 0; i < options.path.length; i++) {
+    for (var i = 0; i < options.paths.length; i++) {
         if(options.async) {
-            replacizeFile(options.path[i]);
+            replacizeFile(options.paths[i]);
         }
         else {
-            replacizeFileSync(options.path[i]);
+            replacizeFileSync(options.paths[i]);
         }
     }
 

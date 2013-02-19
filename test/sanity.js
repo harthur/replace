@@ -15,7 +15,7 @@ test('basic', function (t) {
   replace({
     regex: "a",
     replacement: "b",
-    path:[file]
+    paths:[file]
   });
 
   var expected = "bbbccc";
@@ -24,7 +24,7 @@ test('basic', function (t) {
   replace({
     regex: "b",
     replacement: "a",
-    path:[file]
+    paths:[file]
   });
 
   var expected = "aaaccc";
@@ -40,7 +40,7 @@ test('multiline', function(t) {
   replace({
     regex: "c$",
     replacement: "t",
-    path:[file],
+    paths:[file],
     multiline: false
   });
 
@@ -50,7 +50,7 @@ test('multiline', function(t) {
   replace({
     regex: "c$",
     replacement: "t",
-    path:[file],
+    paths:[file],
     multiline: true
   });
 
@@ -60,7 +60,7 @@ test('multiline', function(t) {
   replace({
     regex: "t$",
     replacement: "c",
-    path:[file],
+    paths:[file],
     multiline: true
   });
 
@@ -76,7 +76,7 @@ test('case insensitive', function(t) {
   replace({
     regex: "a",
     replacement: "c",
-    path:[file],
+    paths:[file],
     ignoreCase: true
   });
 
@@ -86,7 +86,7 @@ test('case insensitive', function(t) {
   replace({
     regex: "c",
     replacement: "A",
-    path:[file]
+    paths:[file]
   });
 
   var expected = "AAAA";
@@ -101,7 +101,7 @@ test('preview', function(t) {
   replace({
     regex: "a",
     replacement: "c",
-    path:[file],
+    paths:[file],
     preview: true
   });
 

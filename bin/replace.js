@@ -15,7 +15,7 @@ var options = nomnom.options({
         help: "Replacement string for matches",
         required: true
     },
-    path: {
+    paths: {
         position: 2,
         help: "File or directory to search (default is '.')",
         list: true,

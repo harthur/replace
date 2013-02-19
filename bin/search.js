@@ -10,7 +10,7 @@ var options = nomnom.options({
         help: "JavaScript regex for searching file e.g. '\\d+'",
         required: true
     },
-    path: {
+    paths: {
         position: 1,
         help: "File or directory to search (default is '.')",
         list: true,

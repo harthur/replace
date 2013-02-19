@@ -79,7 +79,7 @@ var replace = require("replace");
 replace({
   regex: "foo",
   replacement: "bar",
-  path: ['.'],
+  paths: ['.'],
   recursive: true,
   silent: true,
 });
