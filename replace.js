@@ -30,7 +30,7 @@ module.exports = function(options) {
 
     var includes;
     if (options.include) {
-        includes = options.include.split(",").map(patternToRegex);
+        includes = options.include.split(",");
     }
     var excludes = [];
     if (options.exclude) {
@@ -54,15 +54,15 @@ module.exports = function(options) {
         }
     }
 
-    function canSearch(file) {
+    function canSearch(file, isFile) {
       var inIncludes = includes && includes.some(function(include) {
           return minimatch(file, include, { matchBase: true });
       })
-      var inExcludes = excludes && excludes.some(function(exclude) {
+      var inExcludes = excludes.some(function(exclude) {
           return minimatch(file, exclude, { matchBase: true });
       })
 
-      return ((!includes || inIncludes) && (!excludes || !inExcludes));
+      return ((!includes || !isFile || inIncludes) && (!excludes || !inExcludes));
     }
 
     function replacizeFile(file) {
@@ -73,10 +73,11 @@ module.exports = function(options) {
               // don't follow symbolic links for now
               return;
           }
-          if (!canSearch(file)) {
+          var isFile = stats.isFile();
+          if (!canSearch(file, isFile)) {
               return;
           }
-          if (stats.isFile()) {
+          if (isFile) {
               fs.readFile(file, "utf-8", function(err, text) {
                   if (err) {
                       if (err.code == 'EMFILE') {
@@ -111,10 +112,11 @@ module.exports = function(options) {
           // don't follow symbolic links for now
           return;
       }
-      if (!canSearch(file)) {
+      var isFile = stats.isFile();
+      if (!canSearch(file, isFile)) {
           return;
       }
-      if (stats.isFile()) {
+      if (isFile) {
           var text = fs.readFileSync(file, "utf-8");
 
           text = replacizeText(text, file);
