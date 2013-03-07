@@ -42,7 +42,7 @@ replace '(\w+)_(\w+)' '$1-$2' *
 Replace only in files with names matching *.js:
 
 ```
-replace 'foo' 'bar' . -r --include=*.js
+replace 'foo' 'bar' . -r --include="*.js"
 ```
 
 Don't replace in files with names matching *.min.js and *.py:
