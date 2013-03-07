@@ -88,7 +88,7 @@ module.exports = function(options) {
                   }
 
                   text = replacizeText(text, file);
-                  if (canReplace) {
+                  if (canReplace && text !== null) {
                       fs.writeFile(file, text, function(err) {
                           if (err) throw err;
                       });
@@ -120,7 +120,7 @@ module.exports = function(options) {
           var text = fs.readFileSync(file, "utf-8");
 
           text = replacizeText(text, file);
-          if (canReplace) {
+          if (canReplace && text !== null) {
               fs.writeFileSync(file, text);
           }
       }
@@ -135,7 +135,7 @@ module.exports = function(options) {
     function replacizeText(text, file) {
         var match = text.match(regex);
         if (!match) {
-            return text;
+            return null;
         }
 
         if (!options.silent) {
