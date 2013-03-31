@@ -63,6 +63,11 @@ module.exports = {
         choices: ['red', 'green', 'blue', 'cyan', 'yellow', 'magenta', 'bold', 'italic'],
         default: 'cyan'
     },
+    fileColor: {
+        help: "highlight matching file's name in color, e.g. 'green' or 'blue'",
+        choices: ['red', 'green', 'blue', 'cyan', 'yellow', 'magenta', 'bold', 'italic'],
+        default: 'yellow'
+    },
     async: {
         abbr: 'a',
         flag: true,
