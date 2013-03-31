@@ -139,7 +139,7 @@ module.exports = function(options) {
         }
 
         if (!options.silent) {
-            var printout = "  " + file[options.fileColor];
+            var printout = file[options.fileColor];
             if (options.count) {
                 printout += (" (" + match.length + ")").grey;
             }
@@ -157,7 +157,7 @@ module.exports = function(options) {
                     }
                     var replacement = options.replacement || "$&";
                     line = line.replace(regex, replaceFunc || replacement[options.color]);
-                    console.log("     " + (i + 1) + ": " + line.slice(0, limit));
+                    console.log(" " + (i + 1) + ": " + line.slice(0, limit));
                 }
             }
         }
