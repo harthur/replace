@@ -9,7 +9,7 @@
     "url": "http://github.com/harthur/replace.git"
   },
   "dependencies": {
-    "nomnom": "1.5.x",
+    "nomnom": "1.6.x",
     "colors": "0.5.x",
     "minimatch": "~0.2.9"
   },
