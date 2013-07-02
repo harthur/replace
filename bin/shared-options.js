@@ -10,6 +10,7 @@ module.exports = {
         position: 1,
         help: "File or directory to search (default is '*')",
         list: true,
+        type: "string",
         default: ["*"]
     },
     recursive: {
