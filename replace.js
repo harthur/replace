@@ -139,7 +139,7 @@ module.exports = function(options) {
         }
 
         if (!options.silent) {
-            var printout = file[options.fileColor];
+            var printout = file[options.fileColor] || file;
             if (options.count) {
                 printout += (" (" + match.length + ")").grey;
             }
