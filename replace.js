@@ -65,7 +65,7 @@ module.exports = function(options) {
       return ((!includes || !isFile || inIncludes) && (!excludes || !inExcludes));
     }
 
-    function replacizeFile(file) {
+    function replacizeFile(file, depth) {
       fs.lstat(file, function(err, stats) {
           if (err) throw err;
 
@@ -95,18 +95,18 @@ module.exports = function(options) {
                   }
               });
           }
-          else if (stats.isDirectory() && options.recursive) {
+          else if (stats.isDirectory() && (options.recursive || depth == undefined || depth == 0)) {
               fs.readdir(file, function(err, files) {
                   if (err) throw err;
                   for (var i = 0; i < files.length; i++) {
-                      replacizeFile(path.join(file, files[i]));
+                      replacizeFile(path.join(file, files[i]), depth++);
                   }
               });
           }
        });
     }
 
-    function replacizeFileSync(file) {
+    function replacizeFileSync(file, depth) {
       var stats = fs.lstatSync(file);
       if (stats.isSymbolicLink()) {
           // don't follow symbolic links for now
@@ -124,10 +124,10 @@ module.exports = function(options) {
               fs.writeFileSync(file, text);
           }
       }
-      else if (stats.isDirectory() && options.recursive) {
+      else if (stats.isDirectory() && (options.recursive || depth == undefined || depth == 0)) {
           var files = fs.readdirSync(file);
           for (var i = 0; i < files.length; i++) {
-              replacizeFileSync(path.join(file, files[i]));
+              replacizeFileSync(path.join(file, files[i]), depth++);
           }
       }
     }
