@@ -1,6 +1,6 @@
 var fs = require("fs"),
     test = require('tape'),
-    replace = require('replace');
+    replace = require('../replace');
 
 function getText(file) {
   var content = fs.readFileSync(file, "utf-8");

@@ -1,6 +1,6 @@
 var fs = require("fs"),
     test = require('tape'),
-    replace = require('replace');
+    replace = require('../replace');
 
 function getText(file) {
   var content = fs.readFileSync(file, "utf-8");
@@ -30,6 +30,30 @@ test('basic', function (t) {
   var expected = "aaaccc";
   t.equal(getText(file), expected, "reverting worked");
 });
+
+test('numbers', function(t) {
+  t.plan(2);
+
+  var file = "./test_files/test_numbers.txt";
+
+  replace({
+    regex: "123",
+    replacement: "456",
+    paths:[file]
+  });
+
+  var expected = "a456b";
+  t.equal(getText(file), expected, "number replace works");
+
+  replace({
+    regex: "456",
+    replacement: "123",
+    paths:[file]
+  });
+
+  var expected = "a123b";
+  t.equal(getText(file), expected, "reverting worked");
+})
 
 
 test('multiline', function(t) {
