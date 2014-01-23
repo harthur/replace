@@ -155,7 +155,7 @@ module.exports = function(options) {
                     if (++lineCount > options.maxLines) {
                         break;
                     }
-                    var replacement = options.replacement + "" || "$&";
+                    var replacement = options.replacement || "$&";
                     line = line.replace(regex, replaceFunc || replacement[options.color]);
                     console.log(" " + (i + 1) + ": " + line.slice(0, limit));
                 }

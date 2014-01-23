@@ -9,6 +9,7 @@ var addlOptions = {
     replacement: {
         position: 1,
         help: "Replacement string for matches",
+        type: "string",
         required: true
     },
     paths: {
