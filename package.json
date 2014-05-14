@@ -9,6 +9,9 @@
     "type": "git",
     "url": "http://github.com/harthur/replace.git"
   },
+  "scripts": {
+    "test": "tap test"
+  },
   "dependencies": {
     "nomnom": "1.6.x",
     "colors": "0.5.x",
