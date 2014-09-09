@@ -1,9 +1,21 @@
 var fs = require("fs"),
     path = require("path"),
     colors = require("colors"),
-    minimatch = require("minimatch");
+    minimatch = require("minimatch"),
+    sharedOptions = require("./bin/shared-options");
 
 module.exports = function(options) {
+
+    // If no flags or paths were defined, search recursively under the current
+    // directory.
+    if (options.paths.length === 1 &&
+        options.paths[0] === sharedOptions.paths.default[0] &&
+        !options.hasOwnProperty('recursive')) {
+
+        options.paths = ['.'];
+        options.recursive = true;
+    }
+
     var lineCount = 0,
         limit = 400; // chars per line
 

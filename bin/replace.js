@@ -14,10 +14,10 @@ var addlOptions = {
     },
     paths: {
         position: 2,
-        help: "File or directory to search (default is '.')",
+        help: "File or directory to search (default is '*')",
         type: "string",
         list: true,
-        default: ["."]
+        default: ["*"]
     },
     funcFile: {
         abbr: 'f',

@@ -8,10 +8,10 @@ module.exports = {
     },
     paths: {
         position: 1,
-        help: "File or directory to search (default is '.')",
+        help: "File or directory to search (default is '*')",
         list: true,
         type: "string",
-        default: ["."]
+        default: ["*"]
     },
     recursive: {
         abbr: 'r',
