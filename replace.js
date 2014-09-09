@@ -6,8 +6,9 @@ var fs = require("fs"),
 
 module.exports = function(options) {
 
-    // If no flags or paths were defined, search recursively under the current
-    // directory.
+    // If the path is the same as the default and the recursive option was not
+    // specified, search recursively under the current directory as a
+    // convenience.
     if (options.paths.length === 1 &&
         options.paths[0] === sharedOptions.paths.default[0] &&
         !options.hasOwnProperty('recursive')) {
