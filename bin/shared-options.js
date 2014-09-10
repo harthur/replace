@@ -74,5 +74,9 @@ module.exports = {
         flag: true,
         help: "asynchronously read/write files in directory (faster)",
         hidden: true
+    },
+    noColor: {
+      help: 'Disable color output.',
+      flag: true
     }
-}
+};

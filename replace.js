@@ -150,9 +150,11 @@ module.exports = function(options) {
         }
 
         if (!options.silent) {
-            var printout = file[options.fileColor] || file;
+            var printout = options.noColor ? file : file[options.fileColor] || file;
             if (options.count) {
-                printout += (" (" + match.length + ")").grey;
+                var count = " (" + match.length + ")";
+                count = options.noColor ? count : count.grey;
+                printout += count;
             }
             console.log(printout);
         }
@@ -167,7 +169,10 @@ module.exports = function(options) {
                         break;
                     }
                     var replacement = options.replacement || "$&";
-                    line = line.replace(regex, replaceFunc || replacement[options.color]);
+                    if (!options.noColor) {
+                      replacement = replacement[options.color];
+                    }
+                    line = line.replace(regex, replaceFunc || replacement);
                     console.log(" " + (i + 1) + ": " + line.slice(0, limit));
                 }
             }
