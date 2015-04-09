@@ -1,13 +1,13 @@
 var fs = require("fs"),
-    test = require('tape'),
-    replace = require('../replace');
+    test = require("tape"),
+    replace = require("../replace");
 
 function getText(file) {
   var content = fs.readFileSync(file, "utf-8");
   return content;
 }
 
-test('basic', function (t) {
+test("basic", function (t) {
   t.plan(2);
 
   var file = "./test_files/test_basic.txt";
@@ -31,7 +31,7 @@ test('basic', function (t) {
   t.equal(getText(file), expected, "reverting worked");
 });
 
-test('numbers', function(t) {
+test("numbers", function(t) {
   t.plan(2);
 
   var file = "./test_files/test_numbers.txt";
@@ -56,7 +56,7 @@ test('numbers', function(t) {
 })
 
 
-test('multiline', function(t) {
+test("multiline", function(t) {
   t.plan(3);
 
   var file = "./test_files/test_multiline.txt";
@@ -92,7 +92,7 @@ test('multiline', function(t) {
   t.equal(getText(file), expected, "reverting worked");
 });
 
-test('case insensitive', function(t) {
+test("case insensitive", function(t) {
   t.plan(2);
 
   var file = "./test_files/test_case.txt";
@@ -117,7 +117,7 @@ test('case insensitive', function(t) {
   t.equal(getText(file), expected, "reverting worked");
 })
 
-test('preview', function(t) {
+test("preview", function(t) {
   t.plan(1);
 
   var file = "./test_files/test_preview.txt";
