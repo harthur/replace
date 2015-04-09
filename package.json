@@ -1,24 +1,29 @@
 {
   "name": "replace",
   "description": "Command line search and replace utility",
+  "homepage": "https://github.com/harthur/replace",
   "license": "MIT",
   "version": "0.3.0",
   "author": "Heather Arthur <fayearthur@gmail.com>",
   "main": "replace.js",
+  "bugs": {
+    "url": "https://github.com/harthur/replace/issues"
+  },
   "repository": {
     "type": "git",
-    "url": "http://github.com/harthur/replace.git"
+    "url": "git+https://github.com/harthur/replace.git"
   },
   "scripts": {
     "test": "tap test"
   },
   "dependencies": {
-    "nomnom": "1.6.x",
-    "colors": "0.5.x",
-    "minimatch": "~0.2.9"
+    "colors": "~1.1.2",
+    "minimatch": "~3.0.0",
+    "nomnom": "~1.8.1"
   },
   "devDependencies": {
-    "tape": "~0.2.2"
+    "tap": "~2.1.0",
+    "tape": "~4.2.1"
   },
   "bin": {
     "replace": "./bin/replace.js",
@@ -29,5 +34,10 @@
     "grep",
     "search",
     "replace"
+  ],
+  "files": [
+    "LICENSE",
+    "bin",
+    "replace.js"
   ]
 }
