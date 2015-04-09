@@ -10,8 +10,8 @@ module.exports = function(options) {
     // convenience.
     if (options.paths.length === 1 &&
         options.paths[0] === sharedOptions.paths.default[0] &&
-        !options.hasOwnProperty('recursive')) {
-        options.paths = ['.'];
+        !options.hasOwnProperty("recursive")) {
+        options.paths = ["."];
         options.recursive = true;
     }
 
@@ -47,13 +47,13 @@ module.exports = function(options) {
     if (options.exclude) {
         excludes = options.exclude.split(",");
     }
-    var ignoreFile = options.excludeList || path.join(__dirname, '/defaultignore');
+    var ignoreFile = options.excludeList || path.join(__dirname, "/defaultignore");
     var ignores = fs.readFileSync(ignoreFile, "utf-8").split("\n");
     excludes = excludes.concat(ignores);
 
     var replaceFunc;
     if (options.funcFile) {
-        eval('replaceFunc = ' + fs.readFileSync(options.funcFile, "utf-8"));
+        eval("replaceFunc = " + fs.readFileSync(options.funcFile, "utf-8"));
     }
 
     for (var i = 0; i < options.paths.length; i++) {
@@ -91,8 +91,8 @@ module.exports = function(options) {
           if (isFile) {
               fs.readFile(file, "utf-8", function(err, text) {
                   if (err) {
-                      if (err.code == 'EMFILE') {
-                          console.log('Too many files, try running `replace` without --async');
+                      if (err.code == "EMFILE") {
+                          console.log("Too many files, try running `replace` without --async");
                           process.exit(1);
                       }
                       throw err;

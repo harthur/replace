@@ -1,3 +1,3 @@
 function(match) {
-   return match.toLowerCase();
+    return match.toLowerCase();
 }

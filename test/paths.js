@@ -1,13 +1,13 @@
 var fs = require("fs"),
-    test = require('tape'),
-    replace = require('../replace');
+    test = require("tape"),
+    replace = require("../replace");
 
 function getText(file) {
   var content = fs.readFileSync(file, "utf-8");
   return content;
 }
 
-test('recursive', function (t) {
+test("recursive", function (t) {
   t.plan(7);
 
   replace({
@@ -42,7 +42,7 @@ test('recursive', function (t) {
   });
 });
 
-test('include', function(t) {
+test("include", function(t) {
   t.plan(5);
 
   replace({
@@ -83,7 +83,7 @@ test('include', function(t) {
   });
 })
 
-test('exclude', function(t) {
+test("exclude", function(t) {
   t.plan(6);
 
   replace({
