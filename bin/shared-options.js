@@ -78,5 +78,9 @@ module.exports = {
     noColor: {
       help: 'Disable color output.',
       flag: true
+    },
+    dot: {
+        help: "when using include option, include files starting with dot, e.g. '.class' or '.project'",
+        default: false
     }
 };
