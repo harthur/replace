@@ -132,3 +132,33 @@ test('preview', function(t) {
   var expected = "aaaa";
   t.equal(getText(file), expected, "no replacement if 'preview' is true");
 })
+
+test('dot', function(t) {
+  t.plan(8);
+
+  //var changedFiles = ['./test_files/.test'];
+  var file = "./test_files/.test";
+
+  replace({
+    regex: "dot",
+    replacement: "DOT",
+    paths: [file],
+    recursive: false,
+    dot: true
+  });
+
+  var expected = "DOT";
+
+  t.equal(getText(file), expected, "- found a file that start with dot");
+  
+  replace({
+    regex: "DOT",
+    replacement: "dot",
+    paths: [file],
+    recursive: false,
+    dot: true
+  });
+
+  var expected = "dot";
+  t.equal(getText(file), expected, "reverting worked");
+})

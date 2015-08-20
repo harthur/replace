@@ -67,16 +67,17 @@ module.exports = function(options) {
 
     function canSearch(file, isFile) {
       var inIncludes = includes && includes.some(function(include) {
-          return minimatch(file, include, { matchBase: true });
+          return minimatch(file, include, { matchBase: true, dot: options.dot });
       })
       var inExcludes = excludes.some(function(exclude) {
-          return minimatch(file, exclude, { matchBase: true });
+          return minimatch(file, exclude, { matchBase: true, dot: options.dot });
       })
 
       return ((!includes || !isFile || inIncludes) && (!excludes || !inExcludes));
     }
 
     function replacizeFile(file) {
+      console.log(file,canSearch(file, isFile));
       fs.lstat(file, function(err, stats) {
           if (err) throw err;
 
@@ -118,6 +119,7 @@ module.exports = function(options) {
     }
 
     function replacizeFileSync(file) {
+      console.log(file,canSearch(file, isFile));
       var stats = fs.lstatSync(file);
       if (stats.isSymbolicLink()) {
           // don't follow symbolic links for now
