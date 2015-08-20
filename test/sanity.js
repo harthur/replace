@@ -136,14 +136,14 @@ test('preview', function(t) {
 test('dot', function(t) {
   t.plan(8);
 
-  //var changedFiles = ['./test_files/.test'];
-  var file = "./test_files/.test";
+  var file = "./test_files/.project";
 
   replace({
     regex: "dot",
     replacement: "DOT",
     paths: [file],
-    recursive: false,
+    recursive: true,
+    include: '*',
     dot: true
   });
 
@@ -155,10 +155,39 @@ test('dot', function(t) {
     regex: "DOT",
     replacement: "dot",
     paths: [file],
-    recursive: false,
+    recursive: true,
+    include: '*',
     dot: true
   });
 
   var expected = "dot";
   t.equal(getText(file), expected, "reverting worked");
+
+  replace({
+    regex: "dot",
+    replacement: "DOT",
+    paths: [file],
+    recursive: true,
+    include: '*',
+    fileColor: 'red',
+    dot: false
+  });
+
+  var expected = "dot";
+
+  t.equal(getText(file), expected, "- default without dot still working");
+  
+  replace({
+    regex: "DOT",
+    replacement: "dot",
+    paths: [file],
+    recursive: true,
+    include: '*',
+    fileColor: 'red',
+    dot: false
+  });
+
+  var expected = "dot";
+  t.equal(getText(file), expected, "reverting worked if mess");
+  
 })

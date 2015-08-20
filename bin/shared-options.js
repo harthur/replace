@@ -80,7 +80,7 @@ module.exports = {
       flag: true
     },
     dot: {
-        help: "include or exclude file starting with dot, e.g. '.class' or '.project'",
+        help: "when using include option, include files starting with dot, e.g. '.class' or '.project'",
         default: false
     }
 };
