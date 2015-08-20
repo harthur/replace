@@ -44,7 +44,6 @@ var addlOptions = {
 
 var opts = {};
 for (var opt in sharedOptions) {
-    console.log(opt);
     opts[opt] = sharedOptions[opt];
 }
 for (var opt in addlOptions) {
