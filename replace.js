@@ -1,3 +1,60 @@
+// I was moved by your post on Hacker News. 
+//
+// The first thing I will say is that you shouldn't worry.
+// All programmers write code they later come to dislike or find embarassing.
+// That's called growth. If you look back at code you've written and don't
+// feel that way, you're either Turing Award material or have stopped learning.
+// 
+// Second, while I am neither defending nor condemning the Twitter comments you
+// highlighted, I would like to submit some ideas for you to consider. These are
+// offered in a spirit of helpfulness and empathy, so I sincerely hope they're 
+// received in that vein.
+//
+// - As programmers, we must frequently pass judgement on the work of others
+// - Ignorance is not the same as stupidity
+// - It is a valuable skill to be able separate criticism of one's work from
+//   criticism of one's person
+// 
+// Third, I would like to offer my impression of this utility and the code
+// found below. My intent is to possibly offer some helpful and constructive
+// criticism, since your post implied that you would have been receptive to 
+// learning and improving, and you seemed genuinely interested in understanding
+// the reaction.
+//
+// The first thing that strikes me is that 'search' and 'replace' reinvent
+// functionality that is found in existing utilities. This is not always
+// a bad thing. I can think of several great reasons to do so:
+//
+// - you believe the existing program to be of poor quality (for any definition of quality)
+// - you wish to specialize (or generalize) the behavior of a program
+// - you wish to 'port' a program to an unsupported platform
+// - you with to undertake the task of rewriting a program as a learning exercise
+//
+// In this case, the utilities we are primarily considering are 'grep' and 'sed'. 
+// There is certainly a case to be made that grep's "user interface" is not suited 
+// to novices. In fact, the popular code search tool 'ack' styles itself as a better
+// grep for code search.
+//
+// On the other hand, grep and sed are ubiquitous. They can be found on every Unix/Linux box,
+// and Mac. They are also incredibly powerful utilities offering much more functionality and
+// likely better performance than these scripts. When searching a large codebase, speed matters.
+// I submit to you that no matter how inhumane their interfaces may seem at first glance that it is
+// worthwhile to learn to wield them well. Your effort will be repaid many times over in both 
+// increased productivity and peer recognition. I also believe learning these tools will help you
+// understand other tools (and even software architectures!) better.
+// 
+// Lastly, skimming this file from top to bottom, I made the following observations:
+// - code organization could benefit from more subroutines
+// - eval is generally considered poor style
+// - at first glance, algorithmic complexity looks like a problem 
+// - you have unnecessary duplication in code
+// 
+// Rest easy, my eyes are no worse for wear than they were when I began this exercise.
+// That's all the time I have for now, but I sincerely hope to have benefitted you in 
+// some small way. I hope you feel better and continue to read, to write, and, yes, even 
+// to release code in the future.
+// 
+// Best of luck!
 var fs = require("fs"),
     path = require("path"),
     colors = require("colors"),
