@@ -1,5 +1,6 @@
 var fs = require("fs"),
     test = require('tape'),
+    EOL = require('os').EOL,
     replace = require('../replace');
 
 function getText(file) {
@@ -68,7 +69,7 @@ test('multiline', function(t) {
     multiline: false
   });
 
-  var expected = "abc\ndef";
+  var expected = "abc"+EOL+"def";
   t.equal(getText(file), expected, "$ shouldn't match without multiline");
 
   replace({
@@ -78,7 +79,7 @@ test('multiline', function(t) {
     multiline: true
   });
 
-  var expected = "abt\ndef";
+  var expected = "abt"+EOL+"def";
   t.equal(getText(file), expected, "with multiline, $ should match eol");
 
   replace({
@@ -88,7 +89,7 @@ test('multiline', function(t) {
     multiline: true
   });
 
-  var expected = "abc\ndef";
+  var expected = "abc"+EOL+"def";
   t.equal(getText(file), expected, "reverting worked");
 });
 
