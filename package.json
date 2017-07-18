@@ -13,9 +13,9 @@
     "test": "tap test"
   },
   "dependencies": {
-    "nomnom": "1.6.x",
-    "colors": "0.5.x",
-    "minimatch": "~0.2.9"
+    "colors": "^1.1.2",
+    "minimatch": "^3.0.4",
+    "nomnom": "^1.8.1"
   },
   "devDependencies": {
     "tape": "~0.2.2"
